@@ -1,13 +1,14 @@
-$(function(){
-  $('#paste').click(function(){pasteSelection();});
-});
-function pasteSelection() {
-  chrome.tabs.query({active:true, windowId: chrome.windows.WINDOW_ID_CURRENT}, 
-  function(tab) {
-    chrome.tabs.sendMessage(tab[0].id, {method: "getSelection"}, 
-    function(response){
-      var text = document.getElementById('text'); 
-      text.innerHTML = response.data;
-    });
-  });
+function selectText() {
+                var selectionText = "";
+                if (document.getSelection) {
+                    selectionText = document.getSelection();
+                } else if (document.selection) {
+                    selectionText = document.selection.createRange().text;
+                }
+                return selectionText;
 }
+           
+document.onmouseup = function() {
+                document.getElementById("console").innerHTML = selectText();
+}
+window.onload = selectText();
