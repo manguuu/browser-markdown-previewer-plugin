@@ -1,16 +1,16 @@
 {
-  "manifest_version": 3,
-
-  "name": "Drag test",
-  "description": "Hello, World",
-  "version": "1.0.0",
-
-  "action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  },
-  "permissions": [
-    "tabs",
-    "<all_urls>"
-  ]
+   "name": "App name",
+   "version": "1.0",
+   "manifest_version": 2,
+   "description": "Your description",
+   "permissions": [
+     "contextMenus","tabs","notifications"
+    ],
+   "background": { 
+     "scripts": ["background.js"]
+   },
+   "browser_action": {
+      "default_icon": "icon.png"
+      
+    }
 }
