@@ -1,39 +1,53 @@
-/*$(document).ready(function () {
-    $("p").click(function () {
-        $(this).hide();
-    });
-});*/
-var tooltip = '<div id="box">' +
-    '<p id="textbox">hihi</p>' +
-    '</div>';
 
-$(document.body).append(tooltip);
+function makePopup(){
+    var tooltip = document.createElement("div");
+    tooltip.setAttribute(
+      "id",
+      "box"
+    );
+    tooltip.innerHTML=`<p id="textbox">`;
 
-$(document).on("selectionchange", function (e) {
-    console.log("selectionchange");
-    console.log("## SELECTION ###############");
+    document.body.appendChild(tooltip);
+    document.getElementById('box').style.visibility = 'visible';
 
     var selection = window.getSelection();
     var focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
     var top = focus.top;
     var left = focus.left;
-    console.log("##focusNode: ##");
-    console.log("focus.left: ");
-    console.log(focus.left);
-    console.log("focus.right: ");
-    console.log(focus.right);
-    console.log("focus.top: ");
-    console.log(focus.top);
-    console.log("focus.bottom: ");
-    console.log(focus.bottom);
 
-    
-    document.getElementById("box").style.position = 'absolute';
     document.getElementById("box").style.top = focus.top +20 +"px";
     document.getElementById("box").style.left = focus.left + "px";
     document.getElementById("textbox").innerHTML = selection.toString();
-    document.getElementById("box").style.zIndex = 2147483650;
-    document.getElementById("box").style.boxShadow = "rgba(0, 0, 0, 0.2) 0px 1px 3px";
-    document.getElementById("box").style.backgroundColor = "red";
-    document.getElementById("textbox").style.userSelect = "none";
+}
+/** tooltip icon */
+var btn = document.createElement("button");
+btn.setAttribute(
+  "id",
+  "btn"
+);
+document.body.appendChild(btn);
+document.getElementById('btn').style.visibility = 'hidden';
+document.getElementById("btn").addEventListener("click",makePopup);
+btn.innerHTML=`<img src="https://bit.ly/2JASsV0">`
+
+document.addEventListener("mouseup", function (e) {
+  var selectedText = document.getSelection().toString();
+
+  if (selectedText.length ) {
+    var range = document.getSelection().getRangeAt(0);
+    var location = range.getBoundingClientRect();
+    var scrollPosition = $(window).scrollTop();
+    var Top = scrollPosition + location.top-50 + "px";
+    var Left = location.left + location.width / 2 - 50 + "px";
+    
+    btn.style.transform =
+      "translate3d(" + Left + "," + Top + "," + "0px)";
+      document.getElementById('btn').style.visibility = 'visible';
+  }
+  else if(!selectedText.length){
+    document.getElementById('btn').style.visibility = 'hidden';
+    document.getElementById('box').style.visibility = 'hidden';
+  }
 });
+
+

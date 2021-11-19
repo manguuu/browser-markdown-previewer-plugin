@@ -4,10 +4,7 @@
    "manifest_version": 2,
    "description": "Your description",
   "permissions": [
-    "contextMenus",
-    "tabs",
-    "notifications",
-    "activeTab"
+    "contextMenus"
   ],
    "background": { 
      "scripts": ["background.js"]
@@ -18,7 +15,8 @@
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": [ "jquery.js", "content.js" ]
+      "js": [ "jquery.js", "content.js" ],
+      "css":["shareText.css"]
     }
   ]
 }
