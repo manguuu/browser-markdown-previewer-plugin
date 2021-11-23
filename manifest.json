@@ -1,16 +1,14 @@
 {
-   "name": "App name",
+   "name": "markdown_previewer",
    "version": "1.0",
    "manifest_version": 2,
    "description": "Your description",
   "permissions": [
-    "contextMenus",
-    "tabs",
-    "notifications",
-    "activeTab"
+    "contextMenus"
   ],
    "background": { 
-     "scripts": ["background.js"]
+     "scripts": ["background.js"],
+      "persistent": true
    },
   "browser_action": {
     "default_icon": "icon.png"
@@ -18,7 +16,8 @@
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": [ "jquery.js", "content.js" ]
+      "js": [ "jquery.js", "content.js" ],
+      "css":["shareText.css"]
     }
   ]
 }
