@@ -1,18 +1,19 @@
 #btn {
   will-change: transform;
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   top: 0px;
   left: 0px;
   display: flex;
-  padding: 5px 10px;
+  padding: 3px 3px;
   box-sizing: border-box;
   border-radius: 10px;
   border-style: solid;
   justify-content: center;
+  background-color: white;
 }
-#box{
+#box {
   will-change: transform;
   position: absolute;
   box-shadow: rgba(255, 0, 0, 0.5);
@@ -22,7 +23,6 @@
   border-style: solid;
 }
 
-#textbox{
+#textbox {
   user-select: none;
-
 }
