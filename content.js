@@ -5,20 +5,19 @@ function makePopup(){
       "id",
       "box"
     );
-    tooltip.innerHTML=`<p id="textbox">`;
+    tooltip.innerHTML=`<h1>Original</h1><p id="original"><h1>Parsed</h1><p id="parsed">`;
 
     document.body.appendChild(tooltip);
     document.getElementById('box').style.visibility = 'visible';
 
-    var selection = window.getSelection();
-    var focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
-    var top = focus.top;
-    var left = focus.left;
-
-    document.getElementById("box").style.top = focus.top +20 +"px";
+    const selection = window.getSelection();
+    const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
+    
+    document.getElementById("box").style.top = focus.top + 20 +"px";
     document.getElementById("box").style.left = focus.left + "px";
-    selection = parseMd(selection.toString());
-    document.getElementById("textbox").innerHTML = selection;
+    document.getElementById("original").innerHTML = selection.toString();
+    const parsed = parseMd(selection.toString());
+    document.getElementById("parsed").innerHTML = parsed;
 }
 /** tooltip icon */
 var btn = document.createElement("button");
@@ -29,7 +28,7 @@ btn.setAttribute(
 document.body.appendChild(btn);
 document.getElementById('btn').style.visibility = 'hidden';
 document.getElementById("btn").addEventListener("click",makePopup);
-btn.innerHTML=`<img src="https://bit.ly/2JASsV0">`
+btn.innerHTML=`<img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/205_Markdown-1024.png" height="30" width="30">`
 
 document.addEventListener("mouseup", function (e) {
   var selectedText = document.getSelection().toString();
