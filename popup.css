@@ -1,0 +1,26 @@
+.textbox {
+  margin: 10px;
+  color: black;
+  padding-left: 12px;
+  will-change: transform;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+  box-sizing: border-box;
+  border-style: solid;
+  font-size: 12px !important;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(168, 168, 168);
+  padding: 10px 16px 5px;
+  border-style: solid;
+  width: 410px;
+  height: 200px;
+  overflow: scroll;
+}
+
+.markdown-header {
+  margin: 12px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  font-size: 17px;
+}
