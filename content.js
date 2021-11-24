@@ -9,7 +9,7 @@ function makePopup() {
   tooltip.innerHTML=`<div class="markdown-header">Raw MD</div><p id="original"><div class="markdown-header">Preview</div></pr><p id="parsed">`;
 
   document.body.appendChild(tooltip);
-  document.getElementById('box').style.visibility = 'visible';
+  document.getElementById('markdown-box').style.visibility = 'visible';
   document.getElementById('markdown-btn').style.visibility = 'hidden';
   const selection = window.getSelection();
   const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
@@ -26,11 +26,11 @@ function makePopup() {
 var btn = document.createElement("button");
 btn.setAttribute(
   "id",
-  "btn"
+  "markdown-btn"
 );
 document.body.appendChild(btn);
 document.getElementById('markdown-btn').style.visibility = 'hidden';
-document.getElementById("btn").addEventListener("click",makePopup);
+document.getElementById("markdown-btn").addEventListener("click",makePopup);
 btn.innerHTML=`<img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/205_Markdown-1024.png" height="30" width="30">`
 
 document.addEventListener("mouseup", function (e) {
@@ -49,8 +49,8 @@ document.addEventListener("mouseup", function (e) {
   }
   else if (!selectedText.length) {
     document.getElementById('markdown-btn').style.visibility = 'hidden';
-    if (document.getElementById('box') !== null) {
-      document.getElementById('box').style.visibility = 'hidden';
+    if (document.getElementById('markdown-box') !== null) {
+      document.getElementById('markdown-box').style.visibility = 'hidden';
     }
   }
 });
