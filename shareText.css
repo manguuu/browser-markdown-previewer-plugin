@@ -1,4 +1,4 @@
-#btn {
+#markdown-btn {
   will-change: transform;
   position: absolute;
   width: 35px;
@@ -14,7 +14,7 @@
   background-color: white;
 }
 
-#box {
+#markdown-box {
   color: black;
   padding-left: 10px;
   will-change: transform;
@@ -33,7 +33,7 @@
   padding: 10px 16px 5px;
 }
 
-.header {
+.markdown-header {
   display: flex;
   flex-basis: 100%;
   align-items: center;
@@ -45,8 +45,8 @@
   font-weight: 550;
 }
 
-.header::before,
-.header::after {
+.markdown-header::before,
+.markdown-header::after {
   content: "";
   flex-grow: 1;
   background: #ccc;

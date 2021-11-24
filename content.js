@@ -1,24 +1,21 @@
 
 function makePopup() {
-  let tail = document.createElement("div");
-  tail.setAttribute("class", "tail");
-  tail.innerHTML = '<div class="before"></div><div class="after"></div><p>가나다</p>';
   var tooltip = document.createElement("div");
   tooltip.setAttribute(
     "id",
-    "box"
+    'markdown-box'
   );
-  tooltip.innerHTML=`<div class="header">Raw MD</div><p id="original"><div class="header">Preview</div></pr><p id="parsed">`;
+  tooltip.innerHTML=`<div class="markdown-header">Raw MD</div><p id="original"><div class="markdown-header">Preview</div></pr><p id="parsed">`;
 
   document.body.appendChild(tooltip);
   document.getElementById('box').style.visibility = 'visible';
-  document.getElementById('btn').style.visibility = 'hidden';
+  document.getElementById('markdown-btn').style.visibility = 'hidden';
   const selection = window.getSelection();
   const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
   
   var scrollPosition = $(window).scrollTop();
-  document.getElementById("box").style.top = scrollPosition + focus.top + 20 +"px";
-  document.getElementById("box").style.left = focus.left + "px";
+  document.getElementById('markdown-box').style.top = scrollPosition + focus.top + 20 +"px";
+  document.getElementById('markdown-box').style.left = focus.left + "px";
 
   document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
   const parsed = parseMd(selection.toString());
@@ -31,7 +28,7 @@ btn.setAttribute(
   "btn"
 );
 document.body.appendChild(btn);
-document.getElementById('btn').style.visibility = 'hidden';
+document.getElementById('markdown-btn').style.visibility = 'hidden';
 document.getElementById("btn").addEventListener("click",makePopup);
 btn.innerHTML=`<img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/205_Markdown-1024.png" height="30" width="30">`
 
@@ -47,10 +44,10 @@ document.addEventListener("mouseup", function (e) {
     
     btn.style.transform =
       "translate3d(" + Left + "," + Top + "," + "0px)";
-      document.getElementById('btn').style.visibility = 'visible';
+      document.getElementById('markdown-btn').style.visibility = 'visible';
   }
   else if (!selectedText.length) {
-    document.getElementById('btn').style.visibility = 'hidden';
+    document.getElementById('markdown-btn').style.visibility = 'hidden';
     if (document.getElementById('box') !== null) {
       document.getElementById('box').style.visibility = 'hidden';
     }
