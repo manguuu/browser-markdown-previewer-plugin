@@ -5,9 +5,6 @@ project.
 
 ## Core takeaway
 
-- dfd
-  - dfdf
-
 1. We can't use NodeJS for any Chrome extension because it's for sever-side development, not
    client-side (browser).
 2. By inserting code of `md-to-html:21`, we can use the [parser module][1]
