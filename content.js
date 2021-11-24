@@ -1,25 +1,28 @@
 
-function makePopup(){
-    var tooltip = document.createElement("div");
-    tooltip.setAttribute(
-      "id",
-      "box"
-    );
-    tooltip.innerHTML=`<h1>Original</h1><p id="original"><h1>Parsed</h1><p id="parsed">`;
+function makePopup() {
+  let tail = document.createElement("div");
+  tail.setAttribute("class", "tail");
+  tail.innerHTML = '<div class="before"></div><div class="after"></div><p>가나다</p>';
+  var tooltip = document.createElement("div");
+  tooltip.setAttribute(
+    "id",
+    "box"
+  );
+  tooltip.innerHTML=`<div class="header">Raw MD</div><p id="original"><div class="header">Preview</div></pr><p id="parsed">`;
 
-    document.body.appendChild(tooltip);
-    document.getElementById('box').style.visibility = 'visible';
+  document.body.appendChild(tooltip);
+  document.getElementById('box').style.visibility = 'visible';
+  document.getElementById('btn').style.visibility = 'hidden';
+  const selection = window.getSelection();
+  const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
+  
+  var scrollPosition = $(window).scrollTop();
+  document.getElementById("box").style.top = scrollPosition + focus.top + 20 +"px";
+  document.getElementById("box").style.left = focus.left + "px";
 
-    const selection = window.getSelection();
-    const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
-    
-    var scrollPosition = $(window).scrollTop();
-    document.getElementById("box").style.top = scrollPosition + focus.top + 20 +"px";
-    document.getElementById("box").style.left = focus.left + "px";
-
-    document.getElementById("original").innerHTML = selection.toString();
-    const parsed = parseMd(selection.toString());
-    document.getElementById("parsed").innerHTML = parsed;
+  document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
+  const parsed = parseMd(selection.toString());
+  document.getElementById("parsed").innerHTML = parsed;
 }
 /** tooltip icon */
 var btn = document.createElement("button");
@@ -39,16 +42,18 @@ document.addEventListener("mouseup", function (e) {
     var range = document.getSelection().getRangeAt(0);
     var location = range.getBoundingClientRect();
     var scrollPosition = $(window).scrollTop();
-    var Top = scrollPosition + location.top - 50 + "px";
-    var Left = location.left + location.width / 2 - 50 + "px";
+    var Top = scrollPosition + location.top - 30 + "px";
+    var Left = location.left + "px";
     
     btn.style.transform =
       "translate3d(" + Left + "," + Top + "," + "0px)";
       document.getElementById('btn').style.visibility = 'visible';
   }
-  else if(!selectedText.length){
+  else if (!selectedText.length) {
     document.getElementById('btn').style.visibility = 'hidden';
-    document.getElementById('box').style.visibility = 'hidden';
+    if (document.getElementById('box') !== null) {
+      document.getElementById('box').style.visibility = 'hidden';
+    }
   }
 });
 
