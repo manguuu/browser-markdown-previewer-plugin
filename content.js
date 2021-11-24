@@ -13,8 +13,10 @@ function makePopup(){
     const selection = window.getSelection();
     const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
     
-    document.getElementById("box").style.top = focus.top + 20 +"px";
+    var scrollPosition = $(window).scrollTop();
+    document.getElementById("box").style.top = scrollPosition + focus.top + 20 +"px";
     document.getElementById("box").style.left = focus.left + "px";
+
     document.getElementById("original").innerHTML = selection.toString();
     const parsed = parseMd(selection.toString());
     document.getElementById("parsed").innerHTML = parsed;
