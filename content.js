@@ -17,7 +17,7 @@ function makePopup(){
     document.getElementById("box").style.top = scrollPosition + focus.top + 20 +"px";
     document.getElementById("box").style.left = focus.left + "px";
 
-    document.getElementById("original").innerHTML = selection.toString();
+    document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
     const parsed = parseMd(selection.toString());
     document.getElementById("parsed").innerHTML = parsed;
 }
