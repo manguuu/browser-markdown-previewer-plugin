@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MD to HTML</title>
+    <link rel="stylesheet" href="md-to-html.css">
+</head>
+<body>
+    <div class="container">
+        <div class="indicator left">Raw MD</div>
+        <div class="indicator right">Preview</div>
+    </div>
+    <div id="editor-area" class="container">
+        <div class="split left">
+            <textarea id="raw-md" placeholder="Enter md text">
+# Hello
+
+## Hi
+
+- One
+  - Two
+
+1. One
+   1. Two
+
+[Used Module][1]
+
+
+[1]: https://github.com/markedjs/marked
+            </textarea>
+        </div>
+        <div id="md-preview" class="split right"></div>
+    </div>
+
+<!--The core part of markdown conversion is two following scripts.-->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="md-to-html.js"></script>
+</body>
+</html>
