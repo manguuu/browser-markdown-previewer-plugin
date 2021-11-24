@@ -11,12 +11,13 @@
       "persistent": true
    },
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": [ "jquery.js", "content.js" ],
+      "js": [ "jquery.js", "content.js", "marked.esm.js" ],
       "css":["shareText.css"]
     }
   ]

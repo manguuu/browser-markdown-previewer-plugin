@@ -2664,4 +2664,7 @@ const parse = marked;
 const parser = Parser.parse;
 const lexer = Lexer.lex;
 
-export { Lexer, Parser, Renderer, Slugger, TextRenderer, Tokenizer, defaults, getDefaults, lexer, marked, options, parse, parseInline, parser, setOptions, use, walkTokens };
+
+function parseMd(rawMdString){
+    return marked.parse(rawMdString);
+}

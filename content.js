@@ -1,5 +1,3 @@
-import {marked} from "./marked.esm.js";
-
 function makePopup() {
   var tooltip = document.createElement("div");
   tooltip.setAttribute(
@@ -54,7 +52,3 @@ document.addEventListener("mouseup", function (e) {
     }
   }
 });
-
-function parseMd(rawMdString){
-    return marked.parse(rawMdString);
-}
