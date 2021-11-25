@@ -4,15 +4,12 @@ tooltip.setAttribute(
     "id",
     'markdown-box'
 );
-tooltip.setAttribute(
-    "class",
-    "markdown-view"
-);
+
 document.body.appendChild(tooltip);
 document.getElementById('markdown-box').style.visibility = 'hidden';
 tooltip.innerHTML = `<div class="markdown-header">Raw MD</div><p id="original"><div class="markdown-header">Preview</div></pr><p id="parsed">`;
 
-function makePopup() {
+function makePopup(e) {
   
   document.getElementById('markdown-box').style.visibility = 'visible';
   document.getElementById('markdown-btn').style.visibility = 'hidden';
@@ -26,6 +23,7 @@ function makePopup() {
   document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
   const parsed = parseMd(selection.toString());
   document.getElementById("parsed").innerHTML = parsed;
+  e.stopPropagation();
 }
 /** tooltip icon */
 var btn = document.createElement("button");
@@ -33,28 +31,34 @@ btn.setAttribute(
   "id",
   "markdown-btn"
 );
-btn.setAttribute(
-    "class",
-    "markdown-view"
-);
+
 document.body.appendChild(btn);
 document.getElementById('markdown-btn').style.visibility = 'hidden';
-document.getElementById("markdown-btn").addEventListener("click",makePopup);
-btn.innerHTML=`<img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/205_Markdown-1024.png" height="30" width="30">`
+btn.innerHTML = `<img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/205_Markdown-1024.png" height="30" width="30">`
 
-/** documentclickevent*/
-
-document.addEventListener("mousedown", function (e) {
-    if (document.getElementById('markdown-btn').style.visibility == 'visible' && document.getElementById('markdown-box').style.visibility == 'hidden')
-        document.getElementById('markdown-btn').style.visibility = 'hidden';
+/** tooltip clickevent */
+document.getElementById("markdown-box").addEventListener("mousedown", function (e) {
+    e.stopPropagation();
+});
+document.getElementById("markdown-box").addEventListener("mouseup", function (e) {
+    e.stopPropagation();
 });
 
+/** tooltip icon clickevent */
+document.getElementById("markdown-btn").addEventListener("mousedown", function (e) {
+    e.stopPropagation();
+});
+document.getElementById("markdown-btn").addEventListener("mouseup", makePopup);
 
+/** document clickevent*/
+document.addEventListener("mousedown", function (e) {
+    document.getElementById('markdown-btn').style.visibility = 'hidden';
+});
 document.addEventListener("mouseup", function (e) {
     setTimeout($.proxy(function () {
         var selectedText = document.getSelection().toString();
 
-        if (document.getElementById('markdown-btn').style.visibility == 'hidden' && document.getElementById('markdown-box').style.visibility == 'hidden' && selectedText) {
+        if (selectedText && document.getElementById('markdown-box').style.visibility == 'hidden') {
             var range = document.getSelection().getRangeAt(0);
             var location = range.getBoundingClientRect();
             var scrollPosition = $(window).scrollTop();
@@ -65,7 +69,7 @@ document.addEventListener("mouseup", function (e) {
                 "translate3d(" + Left + "," + Top + "," + "0px)";
             document.getElementById('markdown-btn').style.visibility = 'visible';
         }
-        else if (!$(e.target).hasClass('markdown-view')) {
+        else {
             document.getElementById('markdown-btn').style.visibility = 'hidden';
             if (document.getElementById('markdown-box') !== null) {
                 document.getElementById('markdown-box').style.visibility = 'hidden';
