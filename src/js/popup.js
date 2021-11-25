@@ -1,3 +1,12 @@
+document.addEventListener('DOMContentLoaded', function () {
+    chrome.extension.getBackgroundPage().console.log('input');
+    let inputText = document.getElementById('input');
+    inputText.addEventListener('keyup', function () {
+        let outputText = document.getElementById('output');
+        outputText.innerHTML = parseMd(inputText.value);
+    });    
+});
+
 /**
  * marked - a markdown parser
  * Copyright (c) 2011-2021, Christopher Jeffrey. (MIT Licensed)
@@ -1152,7 +1161,7 @@ block.pedantic = merge({}, block.normal, {
     .replace('comment', block._comment)
     .replace(/tag/g, '(?!(?:'
       + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub'
-      + '|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)'
+      + '|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|images)'
       + '\\b)\\w+(?!:|[^\\w\\s@]*@)\\b')
     .getRegex(),
   def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/,
@@ -1952,7 +1961,7 @@ class Renderer {
       return text;
     }
 
-    let out = '<img src="' + href + '" alt="' + text + '"';
+    let out = '<images src="' + href + '" alt="' + text + '"';
     if (title) {
       out += ' title="' + title + '"';
     }

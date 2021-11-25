@@ -7,7 +7,7 @@
     "contextMenus"
   ],
    "background": { 
-     "scripts": ["background.js"],
+     "scripts": ["src/js/background.js"],
       "persistent": true
    },
   "browser_action": {
@@ -17,8 +17,11 @@
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": [ "jquery.js", "content.js", "marked.esm.js" ],
-      "css":["shareText.css"]
+      "js": [ "src/js/jquery.js", "src/js/content.js", "src/js/marked.min.js" ],
+      "css":["src/css/shareText.css"]
     }
+  ],
+  "web_accessible_resources": [
+    "images/*"
   ]
 }
