@@ -15,6 +15,7 @@
 }
 
 #markdown-box {
+  min-width: 250px;
   color: black;
   padding-left: 10px;
   will-change: transform;
@@ -53,13 +54,23 @@
   height: 2px;
   font-size: 0px;
   line-height: 0px;
-  margin: 0px 12px;
+  margin: 0px 5px;
 }
 
 #original {
   margin: 10px;
+  min-width: 220px;
+  max-width: 700px;
+  max-height: 200px;
+  overflow-x: auto;
+  overflow-y: scroll;
 }
 
 #parsed {
+  min-width: 220px;
+  max-width: 700px;
+  max-height: 200px;
+  overflow-x: auto;
+  overflow-y: scroll;
   margin: 10px;
 }
