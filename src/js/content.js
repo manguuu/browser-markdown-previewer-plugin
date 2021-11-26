@@ -19,7 +19,8 @@ function initTooltipButton() {
     mrk_btn.style.visibility = 'hidden';
     let markdownIconReference = chrome.runtime.getURL("images/markdown-icon.png");
     console.log(markdownIconReference);
-    mrk_btn.innerHTML="<img src='" + markdownIconReference + "' height='30' width='30'>";
+    mrk_btn.innerHTML="<img src='" + markdownIconReference +
+        "' height='30' width='30' alt='button to markdown'>";
 }
 
 function addEventListeners() {
@@ -37,6 +38,11 @@ function addEventListeners() {
     });
     mrk_btn.addEventListener("mouseup", visualizePopup);
 
+    chrome.runtime.onMessage.addListener(
+        function(request, sender, sendResponse) {
+            visualizePopup(mrk_btn)
+        }
+    )
 }
 
 
@@ -46,7 +52,7 @@ function hideTooltip() {
             setVisibility(mrk_btn, 'hidden');
 }
 
-function renderDisplay(elem) {
+function renderDisplay() {
     console.log('render display');
         setTimeout($.proxy(function () {
             let selectedText = document.getSelection().toString();
