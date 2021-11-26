@@ -24,7 +24,9 @@ function initTooltipButton() {
 
 function addEventListeners() {
     document.addEventListener('mousedown', hideTooltip);
-    document.addEventListener('mouseup', renderDisplay);
+    document.addEventListener('mouseup', function(e) {
+        renderDisplay(e);
+    });
     mrk_tooltip.addEventListener("mousedown", function (e) {
         e.stopPropagation();
     });
@@ -46,13 +48,13 @@ function hideTooltip() {
             setVisibility(mrk_btn, 'hidden');
 }
 
-function renderDisplay(elem) {
+function renderDisplay(e) {
     console.log('render display');
         setTimeout($.proxy(function () {
             let selectedText = document.getSelection().toString();
 
             if (selectedText && getVisibility(mrk_tooltip) === 'hidden') {
-                showButton();
+                showButton(e);
             } else {
                 setVisibility(mrk_btn, 'hidden');
                 if (mrk_tooltip !== null) {
@@ -100,12 +102,9 @@ function visualizePopup(e) {
     const selection = window.getSelection();
     const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
 
-    let scrollPosition = $(window).scrollTop();
-    mrk_tooltip.style.top = `${scrollPosition + focus.top + 20}px`;
+    mrk_tooltip.style.top = `${e.pageY + 20}px`;
     mrk_tooltip.style.left = `${focus.left}px`;
-    // for (let i = 0; i < selectionString.length; i++) {
-    //     console.log(selectionString.charCodeAt(i));
-    // }
+    
     document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
     document.getElementById("parsed").innerHTML = parseMd(replaceBlack(selection.toString()));
     e.stopPropagation();
@@ -120,13 +119,12 @@ function setVisibility(element, visibility) {
     element.style.visibility = visibility;
 }
 
-function showButton() {
+function showButton(e) {
     console.log('show button');
-
-    let location = document.getSelection().getRangeAt(0).getBoundingClientRect();
-    let scrollPosition = $(window).scrollTop();
-    let boxTop = `${scrollPosition + location.top - 30}px`;
-    let boxLeft = `${location.left}px`;
+    console.log(e.pageY);
+    console.log(e.pageX);
+    let boxTop = `${e.pageY - 30}px`;
+    let boxLeft = `${e.pageX}px`;
 
     mrk_btn.style.transform = "translate3d(" + boxLeft + "," + boxTop + "," + "0px)";
     setVisibility(mrk_btn, 'visible');
