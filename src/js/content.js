@@ -79,6 +79,20 @@ function generateTooltipButton() {
     return btn
 }
 
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
+function replaceBlack(s) {
+    for (let i = 0; i < s.length; i++) {
+        if (s.charCodeAt(i) === 160) {
+            s = s.replaceAt(i, ' ');
+            console.log(s[i]);
+        }
+    }
+    return s;
+}
+
 function visualizePopup(e) {
     console.log('POP UPPPPPP!');
     mrk_tooltip.style.visibility = 'visible';
@@ -89,9 +103,11 @@ function visualizePopup(e) {
     let scrollPosition = $(window).scrollTop();
     mrk_tooltip.style.top = `${scrollPosition + focus.top + 20}px`;
     mrk_tooltip.style.left = `${focus.left}px`;
-
+    // for (let i = 0; i < selectionString.length; i++) {
+    //     console.log(selectionString.charCodeAt(i));
+    // }
     document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
-    document.getElementById("parsed").innerHTML = parseMd(selection.toString());
+    document.getElementById("parsed").innerHTML = parseMd(replaceBlack(selection.toString()));
     e.stopPropagation();
 }
 
