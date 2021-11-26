@@ -67,7 +67,7 @@ function generateTooltip() {
     let tooltip = document.createElement('div');
     tooltip.setAttribute('id', 'markdown-box');
     tooltip.setAttribute('class', 'markdown-view');
-    tooltip.innerHTML = `<div class="markdown-header">Raw MD</div><p id="original"><div class="markdown-header">Preview</div></pr><p id="parsed">`;
+    tooltip.innerHTML = `<div class="markdown-header">Raw MD</div><p id="original" class="textbox"><div class="markdown-header">Preview</div><p id="parsed" class="textbox">`;
     return tooltip
 }
 
