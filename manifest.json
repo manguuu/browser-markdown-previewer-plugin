@@ -12,13 +12,13 @@
    },
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "src/html/popup.html"
   },
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
       "js": [ "src/js/jquery.js", "src/js/content.js", "src/js/marked.min.js" ],
-      "css":["src/css/shareText.css"]
+      "css":["src/css/content.css"]
     }
   ],
   "web_accessible_resources": [
