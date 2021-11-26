@@ -53,7 +53,7 @@ function renderDisplay(elem) {
 
             if (selectedText && getVisibility(mrk_tooltip) === 'hidden') {
                 showButton();
-            } else if (!$(elem.target).hasClass('markdown-view')) {
+            } else {
                 setVisibility(mrk_btn, 'hidden');
                 if (mrk_tooltip !== null) {
                     setVisibility(mrk_tooltip, 'hidden');
@@ -79,7 +79,7 @@ function generateTooltipButton() {
     return btn
 }
 
-function visualizePopup() {
+function visualizePopup(e) {
     console.log('POP UPPPPPP!');
     mrk_tooltip.style.visibility = 'visible';
     mrk_btn.style.visibility = 'hidden';
@@ -92,6 +92,7 @@ function visualizePopup() {
 
     document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
     document.getElementById("parsed").innerHTML = parseMd(selection.toString());
+    e.stopPropagation();
 }
 
 
