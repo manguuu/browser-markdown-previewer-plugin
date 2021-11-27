@@ -17,7 +17,7 @@ function initTooltipButton() {
     document.body.appendChild(generateTooltipButton());
     window.mrk_btn = document.getElementById('markdown-btn');
     mrk_btn.style.visibility = 'hidden';
-    let markdownIconReference = chrome.runtime.getURL("images/markdown-icon.png");
+    let markdownIconReference = chrome.runtime.getURL("images/markdown-previewer.png");
     console.log(markdownIconReference);
     mrk_btn.innerHTML="<img src='" + markdownIconReference +
         "' height='30' width='30' alt='button to markdown'>";
@@ -39,8 +39,9 @@ function addEventListeners() {
     mrk_btn.addEventListener("mouseup", visualizePopup);
 
     chrome.runtime.onMessage.addListener(
-        function(request, sender, sendResponse) {
-            visualizePopup(mrk_btn)
+        function (request, sender, sendResponse) {
+            console.log(request.selected);
+            visualizePopupFromBackground(request.selected);
         }
     )
 }
@@ -117,6 +118,22 @@ function visualizePopup(e) {
     e.stopPropagation();
 }
 
+function visualizePopupFromBackground(selectedText) {
+    console.log('FromBackground : PopUp');
+    mrk_tooltip.style.visibility = 'visible';
+    mrk_btn.style.visibility = 'hidden';
+    const selection = window.getSelection();
+    const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
+
+    let scrollPosition = $(window).scrollTop();
+    mrk_tooltip.style.top = `${scrollPosition + focus.top + 20}px`;
+    mrk_tooltip.style.left = `${focus.left}px`;
+    // for (let i = 0; i < selectionString.length; i++) {
+    //     console.log(selectionString.charCodeAt(i));
+    // }
+    document.getElementById("original").innerHTML = selectedText.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    document.getElementById("parsed").innerHTML = parseMd(replaceBlack(selectedText));
+}
 
 function getVisibility(element) {
     return element.style.visibility;
