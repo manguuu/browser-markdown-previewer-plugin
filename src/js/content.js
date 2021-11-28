@@ -25,7 +25,9 @@ function initTooltipButton() {
 
 function addEventListeners() {
     document.addEventListener('mousedown', hideTooltip);
-    document.addEventListener('mouseup', renderDisplay);
+    document.addEventListener('mouseup', function(e) {
+        renderDisplay(e);
+    });
     mrk_tooltip.addEventListener("mousedown", function (e) {
         e.stopPropagation();
     });
@@ -53,13 +55,13 @@ function hideTooltip() {
             setVisibility(mrk_btn, 'hidden');
 }
 
-function renderDisplay() {
+function renderDisplay(e) {
     console.log('render display');
         setTimeout($.proxy(function () {
             let selectedText = document.getSelection().toString();
 
             if (selectedText && getVisibility(mrk_tooltip) === 'hidden') {
-                showButton();
+                showButton(e);
             } else {
                 setVisibility(mrk_btn, 'hidden');
                 if (mrk_tooltip !== null) {
@@ -74,7 +76,7 @@ function generateTooltip() {
     let tooltip = document.createElement('div');
     tooltip.setAttribute('id', 'markdown-box');
     tooltip.setAttribute('class', 'markdown-view');
-    tooltip.innerHTML = `<div class="markdown-header">Raw MD</div><p id="original" class="textbox"><div class="markdown-header">Preview</div><p id="parsed" class="textbox">`;
+    tooltip.innerHTML = `<div class="markdown-header">Raw MD</div><p id="markdown-original" class="markdown-textbox"><div class="markdown-header">Preview</div><p id="markdown-parsed" class="markdown-textbox">`;
     return tooltip
 }
 
@@ -107,14 +109,11 @@ function visualizePopup(e) {
     const selection = window.getSelection();
     const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
 
-    let scrollPosition = $(window).scrollTop();
-    mrk_tooltip.style.top = `${scrollPosition + focus.top + 20}px`;
+    mrk_tooltip.style.top = `${e.pageY + 20}px`;
     mrk_tooltip.style.left = `${focus.left}px`;
-    // for (let i = 0; i < selectionString.length; i++) {
-    //     console.log(selectionString.charCodeAt(i));
-    // }
-    document.getElementById("original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
-    document.getElementById("parsed").innerHTML = parseMd(replaceBlack(selection.toString()));
+
+    document.getElementById("markdown-original").innerHTML = selection.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
+    document.getElementById("markdown-parsed").innerHTML = parseMd(replaceBlack(selection.toString()));
     e.stopPropagation();
 }
 
@@ -131,8 +130,8 @@ function visualizePopupFromBackground(selectedText) {
     // for (let i = 0; i < selectionString.length; i++) {
     //     console.log(selectionString.charCodeAt(i));
     // }
-    document.getElementById("original").innerHTML = selectedText.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    document.getElementById("parsed").innerHTML = parseMd(replaceBlack(selectedText));
+    document.getElementById("markdown-original").innerHTML = selectedText.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    document.getElementById("markdown-parsed").innerHTML = parseMd(replaceBlack(selectedText));
 }
 
 function getVisibility(element) {
@@ -143,13 +142,11 @@ function setVisibility(element, visibility) {
     element.style.visibility = visibility;
 }
 
-function showButton() {
+function showButton(e) {
     console.log('show button');
 
-    let location = document.getSelection().getRangeAt(0).getBoundingClientRect();
-    let scrollPosition = $(window).scrollTop();
-    let boxTop = `${scrollPosition + location.top - 30}px`;
-    let boxLeft = `${location.left}px`;
+    const boxTop = `${e.pageY - 30}px`;
+    const boxLeft = `${e.pageX}px`;
 
     mrk_btn.style.transform = "translate3d(" + boxLeft + "," + boxTop + "," + "0px)";
     setVisibility(mrk_btn, 'visible');

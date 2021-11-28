@@ -42,7 +42,7 @@
   font-weight: 550;
 }
 
-#original {
+#markdown-original {
   margin: 10px;
   min-width: 220px;
   max-width: 700px;
@@ -51,7 +51,7 @@
   overflow-y: scroll;
 }
 
-#parsed {
+#markdown-parsed {
   min-width: 220px;
   max-width: 700px;
   max-height: 400px;
@@ -60,7 +60,7 @@
   margin: 10px;
 }
 
-.textbox {
+.markdown-textbox {
   padding: 5px 5px;
   border: solid;
   border-width: 2px;
