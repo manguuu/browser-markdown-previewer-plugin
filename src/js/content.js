@@ -20,7 +20,7 @@ function initTooltipButton() {
     let markdownIconReference = chrome.runtime.getURL("images/markdown-previewer.png");
     console.log(markdownIconReference);
     mrk_btn.innerHTML="<img src='" + markdownIconReference +
-        "' height='30' width='30' alt='button to markdown'>";
+        "' height='30' width='30' alt='button to markdown' style='cursor:pointer;'>";
 }
 
 function addEventListeners() {
