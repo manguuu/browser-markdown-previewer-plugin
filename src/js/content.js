@@ -1,3 +1,5 @@
+
+
 const HIDDEN = 'none';
 const VISIBLE = 'block';
 const ICON_IMG = 'images/markdown-previewer.png';
@@ -42,13 +44,6 @@ function addEventListeners() {
         e.stopPropagation();
     });
     mrk_btn.addEventListener("mouseup", visualizePopup);
-
-    chrome.runtime.onMessage.addListener(
-        function (request, sender, sendResponse) {
-            check(request.selected);
-            visualizePopupFromBackground(request.selected);
-        }
-    )
 }
 
 function check(s) {
@@ -129,23 +124,6 @@ function visualizePopup(e) {
         // .replace(/(?:\r\n|\r|\n)/g, '<br />');
     document.getElementById("markdown-parsed").innerHTML = parseMD(replaceBlank(selection.toString()));
     e.stopPropagation();
-}
-
-function visualizePopupFromBackground(selectedText) {
-    console.log('FromBackground : PopUp');
-    mrk_tooltip.style.display = VISIBLE;
-    mrk_btn.style.display = HIDDEN;
-    const selection = window.getSelection();
-    const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
-
-    let scrollPosition = document.body.scrollTop;
-    mrk_tooltip.style.top = `${scrollPosition + focus.top + 20}px`;
-    mrk_tooltip.style.left = `${focus.left}px`;
-    // for (let i = 0; i < selectionString.length; i++) {
-    //     console.log(selectionString.charCodeAt(i));
-    // }
-    document.getElementById("markdown-original").innerHTML = selectedText.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    document.getElementById("markdown-parsed").innerHTML = parseMD(replaceBlank(selectedText));
 }
 
 function getDisplay(element) {

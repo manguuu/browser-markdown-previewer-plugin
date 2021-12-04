@@ -12,6 +12,7 @@
   border-style: hidden;
   justify-content: center;
   background-color: white;
+  z-index: 10000;
 }
 
 #markdown-box {
@@ -29,6 +30,7 @@
   border-image: initial;
   border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(168, 168, 168);
   padding: 10px 16px 5px;
+  z-index: 10000;
 }
 
 .markdown-header {

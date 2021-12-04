@@ -7,10 +7,6 @@
     "storage",
     "contextMenus"
   ],
-   "background": { 
-     "scripts": ["src/js/background.js"],
-      "persistent": true
-   },
   "browser_action": {
     "default_icon": "images/markdown-previewer.png",
     "default_popup": "src/html/popup.html"
