@@ -42,12 +42,18 @@ function addEventListeners() {
 
     chrome.runtime.onMessage.addListener(
         function (request, sender, sendResponse) {
-            console.log(request.selected);
+            check(request.selected);
             visualizePopupFromBackground(request.selected);
         }
     )
 }
 
+function check(s) {
+    for (let i = 0; i < s.length; i++) {
+        console.log(s.charAt(i));
+        console.log(s.charCodeAt(i));
+    }
+}
 
 function hideTooltip() {
     console.log('Hide tooltip');
@@ -124,7 +130,7 @@ function visualizePopupFromBackground(selectedText) {
     const selection = window.getSelection();
     const focus = (selection.focusNode instanceof Text ? selection.getRangeAt(0) : selection.focusNode).getBoundingClientRect();
 
-    let scrollPosition = $(window).scrollTop();
+    let scrollPosition = document.body.scrollTop;
     mrk_tooltip.style.top = `${scrollPosition + focus.top + 20}px`;
     mrk_tooltip.style.left = `${focus.left}px`;
     // for (let i = 0; i < selectionString.length; i++) {
