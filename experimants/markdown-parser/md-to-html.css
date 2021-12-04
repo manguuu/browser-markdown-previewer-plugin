@@ -18,3 +18,7 @@ textarea {
 #editor-area {
     margin-top: 10px;
 }
+
+images {
+    display: block !important;
+}
