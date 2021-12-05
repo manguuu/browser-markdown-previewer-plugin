@@ -2,7 +2,7 @@
    "name": "markdown_previewer",
    "version": "1.0",
    "manifest_version": 2,
-   "description": "Your description",
+   "description": "View the preview of markdown text that you wrote right away by just select the text and click the icon.",
   "permissions": [
     "storage",
     "contextMenus"
@@ -20,5 +20,8 @@
   ],
   "web_accessible_resources": [
     "images/*"
-  ]
+  ],
+  "icons": { "16": "images/markdown-previewer.png",
+           "48": "images/markdown-previewer.png",
+          "128": "images/markdown-previewer.png" }
 }
