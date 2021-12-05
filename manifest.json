@@ -1,12 +1,8 @@
 {
-   "name": "markdown_previewer",
+   "name": "markdown previewer",
    "version": "1.0",
    "manifest_version": 2,
    "description": "View the preview of markdown text that you wrote right away by just select the text and click the icon.",
-  "permissions": [
-    "storage",
-    "contextMenus"
-  ],
   "browser_action": {
     "default_icon": "images/markdown-previewer.png",
     "default_popup": "src/html/popup.html"
