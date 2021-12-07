@@ -43,6 +43,12 @@ This extension allows you to get preview of Markdown text right away by less tha
 ## How to use
 
 1. Drag/Select Markdown text
+
+<img width="953" alt="drag-text" src="https://user-images.githubusercontent.com/60168844/144961958-7701a6e4-d5da-4fd5-9026-7eca27593f81.png">
+
 2. Click icon popped up
+
+<img width="941" alt="show-preview" src="https://user-images.githubusercontent.com/60168844/144962008-92589a34-e337-465c-98d2-43b77e4397df.png">
+
 3. Done!
 
