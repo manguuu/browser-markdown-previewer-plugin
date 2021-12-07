@@ -32,7 +32,7 @@ This extension allows you to get preview of Markdown text right away by less tha
 5. Select folder for this repository
 
 
-### MS Edge
+### MS Edge (similar with Chrome)
 
 1. Select option
 2. "Extensions" -> "Manage extensions"
