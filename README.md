@@ -26,7 +26,8 @@ This extension allows you to get preview of Markdown text right away by less tha
 
 4. Select "Load unpacked"
    
-   <img width="687" alt="Load-unpack" src="https://user-images.githubusercontent.com/66214527/144956907-4cf0c61d-8379-441e-88e3-e175d8308bc1.png">
+   <img width="687" alt="Load-unpack" src="https://user-images.githubusercontent.com/66214527/144957878-65ce71ec-2ccc-463a-83c6-22f225059407.png">
+
 
 5. Select folder for this repository
 
